@@ -101,20 +101,20 @@ plt.tight_layout()
 male_avg = df_male[['C_we', 'C_wk', 'G_we', 'G_wk', 'S_we', 'S_wk', 'T_we', 'T_wk']].mean()
 female_avg = df_female[['C_we', 'C_wk', 'G_we', 'G_wk', 'S_we', 'S_wk', 'T_we', 'T_wk']].mean()
 
-# Create a bar chart for comparison
-# labels = male_avg.index
-# x = np.arange(len(labels))  # positions for the bars
-# width = 0.4  # width of the bars
+Create a bar chart for comparison
+labels = male_avg.index
+x = np.arange(len(labels))  # positions for the bars
+width = 0.4  # width of the bars
 
-# plt.figure(figsize=(10, 6))
-# bar_male=plt.bar(x - width/2, male_avg, width=width, label='Male')  # Shifted to the left
-# bar_female=plt.bar(x + width/2, female_avg, width=width, label='Female')  # Shifted to the right
-# add_value_labels(bar_male)
-# add_value_labels(bar_female)
-# plt.xlabel('Screen Time Metrics')
-# plt.ylabel('Average Values')
-# plt.title('Average Screen Time by Gender')
-# plt.xticks(x, labels)
+plt.figure(figsize=(10, 6))
+bar_male=plt.bar(x - width/2, male_avg, width=width, label='Male')  # Shifted to the left
+bar_female=plt.bar(x + width/2, female_avg, width=width, label='Female')  # Shifted to the right
+add_value_labels(bar_male)
+add_value_labels(bar_female)
+plt.xlabel('Screen Time Metrics')
+plt.ylabel('Average Values')
+plt.title('Average Screen Time by Gender')
+plt.xticks(x, labels)
 plt.tight_layout()
 plt.legend()
 plt.show()

@@ -14,9 +14,9 @@ df3= pd.read_csv('dataset3.csv')
 summary_data = df1.describe()
 print(summary_data)
 
-correlation_matrix =df1.corr()
-sns.heatmap(correlation_matrix,annot=True)
-plt.show()
+# correlation_matrix =df1.corr()
+# sns.heatmap(correlation_matrix,annot=True)
+
 # Step 1: Combine data sets on 'ID'
 combined_df = pd.merge(df1, df2, on='ID')
 
@@ -60,35 +60,12 @@ female_table.auto_set_font_size(False)
 female_table.set_fontsize(10)
 female_table.scale(1.2, 1.2)
 ax2.set_title("Descriptive Statistics for Females", fontsize=14)
-#Descriptive Analysis of Well being indicator
-topics = ['Optm', 'Relx', 'Conf', 'Intp']
 
-# Create a frequency table for each topic
-frequency_table = pd.DataFrame()
-
-for topic in topics:
-    frequency_table[topic] = df_wellBeingIndicator[topic].value_counts().sort_index()
-
-# Fill missing values with 0 and ensure values are integers
-frequency_table = frequency_table.fillna(0).astype(int)
-descriptive_stats = pd.DataFrame({
-    'Mean': frequency_table.mean(),
-    'Standard Deviation': frequency_table.std(),
-    'Min': frequency_table.min(),
-    'Max': frequency_table.max(),
-    '25th Percentile': frequency_table.quantile(0.25),
-    '50th Percentile (Median)': frequency_table.median(),
-    '75th Percentile': frequency_table.quantile(0.75)
-})
-# Plot the frequency table in the third subplot (3,1,3)
 ax3 = plt.subplot(3, 1, 3)
 ax3.axis('off')  # Turn off the axis for the table
 
 # Create the table for descriptive statistics
-wellbeing_table = ax3.table(cellText=descriptive_stats.values.round(2), 
-                            colLabels=descriptive_stats.columns, 
-                            rowLabels=descriptive_stats.index, 
-                            loc='center')
+wellbeing_table = ax3.table(cellText=wellbeing_stats.values, colLabels=wellbeing_stats.columns, rowLabels=wellbeing_stats.index, loc='center')
 
 # Adjust the table properties
 wellbeing_table.auto_set_font_size(False)
@@ -98,8 +75,6 @@ wellbeing_table.scale(1.2, 1.2)
 # Set title
 ax3.set_title("Descriptive Statistics of Well-Being Indicators", fontsize=14)
 
-# Show the plot
-plt.tight_layout()
 
 
 # Calculate average screen time for males and females
@@ -120,6 +95,25 @@ plt.xlabel('Screen Time Metrics')
 plt.ylabel('Average Values')
 plt.title('Average Screen Time by Gender')
 plt.xticks(x, labels)
+
+#plotting histogram of data set3
+columns_to_plot = ['Optm', 'Usef', 'Relx', 'Intp']
+
+# Set up a figure with subplots, 2 rows and 2 columns
+plt.figure(figsize=(10, 8))
+
+# Loop through the columns and plot each histogram in a subplot
+for i, col in enumerate(columns_to_plot, 1):
+    plt.subplot(2, 2, i)  # 2 rows and 2 columns grid
+    plt.hist(df3[col], bins=5, edgecolor='black', color='skyblue')
+    plt.title(f'Histogram of {col}', fontsize=10)  # Title for each plot
+    plt.xlabel('Value', fontsize=8)  # X-axis label
+    plt.ylabel('Frequency', fontsize=8)  # Y-axis label
+
+# Adjust the layout to avoid overlap
+
+# Use tight_layout to adjust the spacing automatically
+
 plt.tight_layout()
 plt.legend()
 plt.show()

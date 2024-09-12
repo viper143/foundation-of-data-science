@@ -11,7 +11,12 @@ def add_value_labels(bars):
 df1 = pd.read_csv('dataset1.csv')  # Dataset 1: ID, gender, minority, deprived
 df2 = pd.read_csv('dataset2.csv')  # Dataset 2: ID, C_we, C_wk, G_we, G_wk, S_we, S_wk, T_we, T_wk
 df3= pd.read_csv('dataset3.csv')
+summary_data = df1.describe()
+print(summary_data)
 
+correlation_matrix =df1.corr()
+sns.heatmap(correlation_matrix,annot=True)
+plt.show()
 # Step 1: Combine data sets on 'ID'
 combined_df = pd.merge(df1, df2, on='ID')
 
@@ -101,7 +106,7 @@ plt.tight_layout()
 male_avg = df_male[['C_we', 'C_wk', 'G_we', 'G_wk', 'S_we', 'S_wk', 'T_we', 'T_wk']].mean()
 female_avg = df_female[['C_we', 'C_wk', 'G_we', 'G_wk', 'S_we', 'S_wk', 'T_we', 'T_wk']].mean()
 
-Create a bar chart for comparison
+# Create a bar chart for comparison
 labels = male_avg.index
 x = np.arange(len(labels))  # positions for the bars
 width = 0.4  # width of the bars
